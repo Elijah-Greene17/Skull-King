@@ -6,3 +6,5 @@ class Box {
         this.bonus = 0;
     }
 }
+
+module.exports = Box;

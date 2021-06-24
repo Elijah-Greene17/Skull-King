@@ -1,3 +1,5 @@
+const Player = require('./Player');
+
 class Session {
 
     constructor(){
@@ -12,3 +14,5 @@ class Session {
     }
 
 }
+
+module.exports = Session;

@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
-
 const Player = require('./models/Player');
+const Session = require('./models/Session');
 
-var sessions = []
-var count = 0
+var sessions = [];
+var count = 0;
 
 app.get('/', (req, res) => {
     count++;
@@ -13,16 +13,18 @@ app.get('/', (req, res) => {
 
 app.get('/newGame', (req, res) => {
     var player = new Player('Elijah');
-    var session = Session();
+    var session = new Session();
     session.addPlayer(player);
 
     sessions.push(session);
     
+    res.send('newGame');
 });
 
 app.get('/joinGame', (req, res) => {
-    var player = Player('Mitchell')
+    var player = new Player('Mitchell')
     sessions[0].addPlayer(player);
+    res.send('joinGame');
 });
 
 
