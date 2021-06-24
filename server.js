@@ -1,31 +1,48 @@
 const express = require('express');
 const app = express();
+app.use(express.json())
 const Player = require('./models/Player');
-const Session = require('./models/Session');
+const Lobby = require('./models/Lobby');
 
-var sessions = [];
-var count = 0;
+var lobby = new Lobby('FamDamily');
 
 app.get('/', (req, res) => {
-    count++;
-    res.send("Count: " + count);
+    console.log('Ping')
+    res.send("Success");
 });
 
-app.get('/newGame', (req, res) => {
-    var player = new Player('Elijah');
-    var session = new Session();
-    session.addPlayer(player);
+app.post('/newGame', (req, res) => {
+    var name = req.body.name;
 
-    sessions.push(session);
+    // TODO: Make not case sensitive
+    if (name == 'Bridget') name = 'Satan';
+    if (name == 'Michaela') name = 'Hortense';
+
+    var player = new Player(name);
+    const id = lobby.createSession();
+    lobby.getSession(id).addPlayer(player);
     
     res.send('newGame');
 });
 
-app.get('/joinGame', (req, res) => {
-    var player = new Player('Mitchell')
-    sessions[0].addPlayer(player);
+app.post('/joinGame', (req, res) => {
+    var id = req.body.id;
+    var name = req.body.name;
+
+    // TODO: Make not case sensitive
+    if (name == 'Bridget') name = 'Satan';
+    if (name == 'Michaela') name = 'Hortense';
+
+    //TEST THIS
+
+    var player = new Player(name)
+    lobby.getSession(id).addPlayer(player);
     res.send('joinGame');
 });
+
+app.get('/start', (req, res) => {
+
+})
 
 
 app.listen(3001, () => {

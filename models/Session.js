@@ -2,8 +2,8 @@ const Player = require('./Player');
 
 class Session {
 
-    constructor(){
-        this.id = '234567';
+    constructor(id){
+        this.id = id
         this.players = [];
     }
 
