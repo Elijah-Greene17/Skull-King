@@ -10,9 +10,10 @@ class Lobby {
     }
     
     createSession(){
+        this.sessionCount++;
         var id = this.sessionCount;
         this.sessions.push(new Session(id));
-        this.sessionCount++;
+        console.log()
         return id;
     }
 

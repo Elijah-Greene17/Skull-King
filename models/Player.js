@@ -6,6 +6,10 @@ class Player {
         this.score = 0;
         this.boxes = [];
     }
+
+    addBox(box){
+        this.boxes.push(box);
+    }
 }
 
 module.exports = Player;

@@ -15,7 +15,6 @@ app.post('/newGame', (req, res) => {
     var name = req.body.name;
 
     // TODO: Make not case sensitive
-    if (name == 'Bridget') name = 'Satan';
     if (name == 'Michaela') name = 'Hortense';
 
     var player = new Player(name);
@@ -30,18 +29,26 @@ app.post('/joinGame', (req, res) => {
     var name = req.body.name;
 
     // TODO: Make not case sensitive
-    if (name == 'Bridget') name = 'Satan';
     if (name == 'Michaela') name = 'Hortense';
 
-    //TEST THIS
-
     var player = new Player(name)
-    lobby.getSession(id).addPlayer(player);
-    res.send('joinGame');
+
+    const session = lobby.getSession(id)
+    if (session != null && session.isOpen){
+        session.addPlayer(player);
+        res.send('joinGame');
+    } else if (session == null){
+        res.send('Id does not exist');
+    } else {
+        res.send('Game with that Id has already started');
+    }
+    
 });
 
 app.get('/start', (req, res) => {
-
+    var id = req.body.id;
+    lobby.getSession(id).startGame();
+    res.send('Game Started');
 })
 
 
