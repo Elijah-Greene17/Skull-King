@@ -12,12 +12,12 @@ class Session {
     addPlayer(player){
         this.players.push(player);
         console.log("Player added!");
-        console.log(this.players)
+        console.log(this.players);
     }
 
     startGame(){
         this.scoreboard = new Scoreboard(this.players);
-        console.log(this.scoreboard)
+        console.log(this.scoreboard);
         this.isOpen = false;
     }
 

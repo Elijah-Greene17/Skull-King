@@ -6,48 +6,65 @@ const Lobby = require('./models/Lobby');
 
 var lobby = new Lobby('FamDamily');
 
+// Ping Test
 app.get('/', (req, res) => {
     console.log('Ping')
-    res.send("Success");
+    res.send("Ping");
 });
 
+// Initiate new game
+/**
+ * param: id (Int)
+ */
 app.post('/newGame', (req, res) => {
-    var name = req.body.name;
+    const name = req.body.name;
+    const id = lobby.createSession();
+    const session =  lobby.getSession(id);
 
     // TODO: Make not case sensitive
     if (name == 'Michaela') name = 'Hortense';
-
     var player = new Player(name);
-    const id = lobby.createSession();
-    lobby.getSession(id).addPlayer(player);
+    session.addPlayer(player);
     
-    res.send('newGame');
+    // TODO: Send Back JSON with session data
+    res.send('newGame started with id ' + id);
 });
 
+// Attempt to join an existing game
+/**
+ * param: id (Int)
+ * param: name (String)
+ */
 app.post('/joinGame', (req, res) => {
-    var id = req.body.id;
-    var name = req.body.name;
+    const id = req.body.id;
+    const name = req.body.name;
+    const session = lobby.getSession(id)
 
     // TODO: Make not case sensitive
     if (name == 'Michaela') name = 'Hortense';
-
     var player = new Player(name)
-
-    const session = lobby.getSession(id)
     if (session != null && session.isOpen){
         session.addPlayer(player);
         res.send('joinGame');
     } else if (session == null){
-        res.send('Id does not exist');
+        res.send('Session with Id '+id+' does not exist');
     } else {
-        res.send('Game with that Id has already started');
+        res.send('Game with that Id '+id+' has already started');
     }
     
 });
 
+
+// Start the game
+/**
+ * param: id (Int)
+ */
 app.get('/start', (req, res) => {
-    var id = req.body.id;
-    lobby.getSession(id).startGame();
+    const id = req.body.id;
+    const session = lobby.getSession(id);
+    session.startGame();
+
+    //TODO: Send Back JSON with Session
     res.send('Game Started');
 })
 
