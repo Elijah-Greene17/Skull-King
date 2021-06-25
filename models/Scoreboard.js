@@ -5,7 +5,7 @@ class ScoreBoard {
         this.players = players;
         this.roundCount = 10;
 
-        for (var i = 0; i < this.roundCount; i++){
+        for (var i = 1; i <= this.roundCount; i++){
             players.forEach(player => {
                 player.addBox(new Box(i))
             });

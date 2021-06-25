@@ -1,7 +1,8 @@
 const Box = require('./Box');
 
 class Player {
-    constructor(name){
+    constructor(id, name){
+        this.id = id;
         this.name = name;
         this.score = 0;
         this.boxes = [];
@@ -10,6 +11,7 @@ class Player {
     addBox(box){
         this.boxes.push(box);
     }
+    
 }
 
 module.exports = Player;

@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 app.use(express.json())
-const Player = require('./models/Player');
 const Lobby = require('./models/Lobby');
+const Player = require('./models/Player');
 
 var lobby = new Lobby('FamDamily');
 
@@ -23,11 +23,10 @@ app.post('/newGame', (req, res) => {
 
     // TODO: Make not case sensitive
     if (name == 'Michaela') name = 'Hortense';
-    var player = new Player(name);
-    session.addPlayer(player);
+    session.addPlayer(name);
     
-    // TODO: Send Back JSON with session data
-    res.send('newGame started with id ' + id);
+    const jsonSession = session.convertToJson();
+    res.json(jsonSession);
 });
 
 // Attempt to join an existing game
@@ -42,14 +41,16 @@ app.post('/joinGame', (req, res) => {
 
     // TODO: Make not case sensitive
     if (name == 'Michaela') name = 'Hortense';
-    var player = new Player(name)
     if (session != null && session.isOpen){
-        session.addPlayer(player);
-        res.send('joinGame');
+        session.addPlayer(name);
+        const jsonSession = session.convertToJson();
+        res.json(jsonSession);
     } else if (session == null){
-        res.send('Session with Id '+id+' does not exist');
+        const errorJson = {"error": "Session with Id "+id+" does not exist"}
+        res.json(errorJson);
     } else {
-        res.send('Game with that Id '+id+' has already started');
+        const errorJson = {"error": "Game with that Id "+id+" has already started'"}
+        res.json(errorJson);
     }
     
 });
@@ -59,15 +60,72 @@ app.post('/joinGame', (req, res) => {
 /**
  * param: id (Int)
  */
-app.get('/start', (req, res) => {
+app.post('/start', (req, res) => {
     const id = req.body.id;
     const session = lobby.getSession(id);
     session.startGame();
 
-    //TODO: Send Back JSON with Session
-    res.send('Game Started');
-})
+    const jsonSession = session.convertToJson();
+    res.json(jsonSession);
+});
 
+// Input Bids
+/**
+ * param: gameId (Int)
+ * param: playerId (Int)
+ * param: bid (Int)
+ */
+app.post('/bid', (req, res) => {
+    const playerId = req.body.playerId;
+    const gameId = req.body.gameId;
+    const bid = req.body.bid;
+
+    const session = lobby.getSession(gameId);
+    session.setBid(playerId, bid);
+    //const jsonSession = session.convertToJson();
+    //res.json(jsonSession);
+    if (session.bidsAreIn()){
+        res.json({"bids" : "are in"});
+    } else {
+        res.json({"bids" : "are not in yet"});
+    }
+
+    
+});
+
+//TODO: Implement Harry
+//TODO: Implement Rascal
+
+// Calculate Scores
+/**
+ * param: playerId (Int)
+ * param: gameId (Int)
+ * param: bidAchieved (bool)
+ * param: tricks (Int)
+ * param: bonusPoints (Int)
+ */
+app.post('/calculate', (req, res) => {
+    //TODO: Test the Shit out of this: Set up Postman Collection Runner
+    const playerId = req.body.playerId;
+    const gameId = req.body.gameId;
+    const bidAchieved = req.body.bidAchieved;
+    const tricks = req.body.tricks;
+    const bonus = req.body.bonusPoints;
+
+    const session = lobby.getSession(gameId);
+    
+    if(bidAchieved){
+        session.achievedBid(playerId, bonus);
+        const jsonSession = session.convertToJson();
+        res.json(jsonSession);
+    } else {
+        session.failedBid(playerId, tricks);
+        const jsonSession = session.convertToJson();
+        res.json(jsonSession);
+    }
+    
+
+});
 
 app.listen(3001, () => {
     console.log("Server is running");
