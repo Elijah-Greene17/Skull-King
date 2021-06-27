@@ -86,6 +86,7 @@ class Session {
         } else {
             points = Math.abs(bid-tricks) * -10;
         }
+        player.boxes[this.currentRound-1].points += points;
     }
 
 }
