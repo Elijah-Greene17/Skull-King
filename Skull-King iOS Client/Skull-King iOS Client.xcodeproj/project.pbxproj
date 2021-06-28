@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		74110D9E268A6F920048AA25 /* IdJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74110D9D268A6F920048AA25 /* IdJoinViewController.swift */; };
+		74110DA0268A757B0048AA25 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74110D9F268A757B0048AA25 /* StartViewController.swift */; };
 		7479A6042688962100BB433F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6032688962100BB433F /* AppDelegate.swift */; };
 		7479A6062688962100BB433F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6052688962100BB433F /* SceneDelegate.swift */; };
 		7479A6082688962100BB433F /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6072688962100BB433F /* IntroViewController.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		74110D9D268A6F920048AA25 /* IdJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdJoinViewController.swift; sourceTree = "<group>"; };
+		74110D9F268A757B0048AA25 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		7479A6002688962100BB433F /* Skull-King iOS Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Skull-King iOS Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7479A6032688962100BB433F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7479A6052688962100BB433F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +143,8 @@
 			children = (
 				7479A6072688962100BB433F /* IntroViewController.swift */,
 				74D9534B2689FE6B003524C6 /* JoinViewController.swift */,
+				74110D9D268A6F920048AA25 /* IdJoinViewController.swift */,
+				74110D9F268A757B0048AA25 /* StartViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -292,9 +298,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7479A6392688A37800BB433F /* Session.swift in Sources */,
+				74110DA0268A757B0048AA25 /* StartViewController.swift in Sources */,
 				7479A6082688962100BB433F /* IntroViewController.swift in Sources */,
 				7479A6042688962100BB433F /* AppDelegate.swift in Sources */,
 				7479A6062688962100BB433F /* SceneDelegate.swift in Sources */,
+				74110D9E268A6F920048AA25 /* IdJoinViewController.swift in Sources */,
 				74D9534C2689FE6B003524C6 /* JoinViewController.swift in Sources */,
 				7479A6372688973700BB433F /* HTTP.swift in Sources */,
 			);
