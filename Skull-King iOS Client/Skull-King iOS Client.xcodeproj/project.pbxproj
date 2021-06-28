@@ -1,0 +1,634 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7479A6042688962100BB433F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6032688962100BB433F /* AppDelegate.swift */; };
+		7479A6062688962100BB433F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6052688962100BB433F /* SceneDelegate.swift */; };
+		7479A6082688962100BB433F /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6072688962100BB433F /* IntroViewController.swift */; };
+		7479A60B2688962100BB433F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7479A6092688962100BB433F /* Main.storyboard */; };
+		7479A60D2688962500BB433F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7479A60C2688962500BB433F /* Assets.xcassets */; };
+		7479A6102688962500BB433F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7479A60E2688962500BB433F /* LaunchScreen.storyboard */; };
+		7479A61B2688962500BB433F /* Skull_King_iOS_ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A61A2688962500BB433F /* Skull_King_iOS_ClientTests.swift */; };
+		7479A6262688962500BB433F /* Skull_King_iOS_ClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6252688962500BB433F /* Skull_King_iOS_ClientUITests.swift */; };
+		7479A6372688973700BB433F /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6362688973700BB433F /* HTTP.swift */; };
+		7479A6392688A37800BB433F /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6382688A37800BB433F /* Session.swift */; };
+		74D9534C2689FE6B003524C6 /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D9534B2689FE6B003524C6 /* JoinViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7479A6172688962500BB433F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7479A5F82688962100BB433F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7479A5FF2688962100BB433F;
+			remoteInfo = "Skull-King iOS Client";
+		};
+		7479A6222688962500BB433F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7479A5F82688962100BB433F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7479A5FF2688962100BB433F;
+			remoteInfo = "Skull-King iOS Client";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7479A6002688962100BB433F /* Skull-King iOS Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Skull-King iOS Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7479A6032688962100BB433F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7479A6052688962100BB433F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7479A6072688962100BB433F /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
+		7479A60A2688962100BB433F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7479A60C2688962500BB433F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7479A60F2688962500BB433F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7479A6112688962500BB433F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7479A6162688962500BB433F /* Skull-King iOS ClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Skull-King iOS ClientTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7479A61A2688962500BB433F /* Skull_King_iOS_ClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skull_King_iOS_ClientTests.swift; sourceTree = "<group>"; };
+		7479A61C2688962500BB433F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7479A6212688962500BB433F /* Skull-King iOS ClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Skull-King iOS ClientUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7479A6252688962500BB433F /* Skull_King_iOS_ClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skull_King_iOS_ClientUITests.swift; sourceTree = "<group>"; };
+		7479A6272688962500BB433F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7479A6362688973700BB433F /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
+		7479A6382688A37800BB433F /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		74D9534B2689FE6B003524C6 /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7479A5FD2688962100BB433F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7479A6132688962500BB433F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7479A61E2688962500BB433F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7479A5F72688962100BB433F = {
+			isa = PBXGroup;
+			children = (
+				7479A6022688962100BB433F /* Skull-King iOS Client */,
+				7479A6192688962500BB433F /* Skull-King iOS ClientTests */,
+				7479A6242688962500BB433F /* Skull-King iOS ClientUITests */,
+				7479A6012688962100BB433F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7479A6012688962100BB433F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7479A6002688962100BB433F /* Skull-King iOS Client.app */,
+				7479A6162688962500BB433F /* Skull-King iOS ClientTests.xctest */,
+				7479A6212688962500BB433F /* Skull-King iOS ClientUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7479A6022688962100BB433F /* Skull-King iOS Client */ = {
+			isa = PBXGroup;
+			children = (
+				7479A6032688962100BB433F /* AppDelegate.swift */,
+				7479A6052688962100BB433F /* SceneDelegate.swift */,
+				7479A634268896A100BB433F /* Views */,
+				7479A6332688968E00BB433F /* Controllers */,
+				7479A635268896C800BB433F /* Models */,
+				7479A60C2688962500BB433F /* Assets.xcassets */,
+				7479A6112688962500BB433F /* Info.plist */,
+			);
+			path = "Skull-King iOS Client";
+			sourceTree = "<group>";
+		};
+		7479A6192688962500BB433F /* Skull-King iOS ClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				7479A61A2688962500BB433F /* Skull_King_iOS_ClientTests.swift */,
+				7479A61C2688962500BB433F /* Info.plist */,
+			);
+			path = "Skull-King iOS ClientTests";
+			sourceTree = "<group>";
+		};
+		7479A6242688962500BB433F /* Skull-King iOS ClientUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7479A6252688962500BB433F /* Skull_King_iOS_ClientUITests.swift */,
+				7479A6272688962500BB433F /* Info.plist */,
+			);
+			path = "Skull-King iOS ClientUITests";
+			sourceTree = "<group>";
+		};
+		7479A6332688968E00BB433F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7479A6072688962100BB433F /* IntroViewController.swift */,
+				74D9534B2689FE6B003524C6 /* JoinViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7479A634268896A100BB433F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7479A6092688962100BB433F /* Main.storyboard */,
+				7479A60E2688962500BB433F /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7479A635268896C800BB433F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7479A6362688973700BB433F /* HTTP.swift */,
+				7479A6382688A37800BB433F /* Session.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7479A5FF2688962100BB433F /* Skull-King iOS Client */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7479A62A2688962500BB433F /* Build configuration list for PBXNativeTarget "Skull-King iOS Client" */;
+			buildPhases = (
+				7479A5FC2688962100BB433F /* Sources */,
+				7479A5FD2688962100BB433F /* Frameworks */,
+				7479A5FE2688962100BB433F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Skull-King iOS Client";
+			productName = "Skull-King iOS Client";
+			productReference = 7479A6002688962100BB433F /* Skull-King iOS Client.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7479A6152688962500BB433F /* Skull-King iOS ClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7479A62D2688962500BB433F /* Build configuration list for PBXNativeTarget "Skull-King iOS ClientTests" */;
+			buildPhases = (
+				7479A6122688962500BB433F /* Sources */,
+				7479A6132688962500BB433F /* Frameworks */,
+				7479A6142688962500BB433F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7479A6182688962500BB433F /* PBXTargetDependency */,
+			);
+			name = "Skull-King iOS ClientTests";
+			productName = "Skull-King iOS ClientTests";
+			productReference = 7479A6162688962500BB433F /* Skull-King iOS ClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7479A6202688962500BB433F /* Skull-King iOS ClientUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7479A6302688962500BB433F /* Build configuration list for PBXNativeTarget "Skull-King iOS ClientUITests" */;
+			buildPhases = (
+				7479A61D2688962500BB433F /* Sources */,
+				7479A61E2688962500BB433F /* Frameworks */,
+				7479A61F2688962500BB433F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7479A6232688962500BB433F /* PBXTargetDependency */,
+			);
+			name = "Skull-King iOS ClientUITests";
+			productName = "Skull-King iOS ClientUITests";
+			productReference = 7479A6212688962500BB433F /* Skull-King iOS ClientUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7479A5F82688962100BB433F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					7479A5FF2688962100BB433F = {
+						CreatedOnToolsVersion = 12.5;
+					};
+					7479A6152688962500BB433F = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 7479A5FF2688962100BB433F;
+					};
+					7479A6202688962500BB433F = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 7479A5FF2688962100BB433F;
+					};
+				};
+			};
+			buildConfigurationList = 7479A5FB2688962100BB433F /* Build configuration list for PBXProject "Skull-King iOS Client" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7479A5F72688962100BB433F;
+			productRefGroup = 7479A6012688962100BB433F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7479A5FF2688962100BB433F /* Skull-King iOS Client */,
+				7479A6152688962500BB433F /* Skull-King iOS ClientTests */,
+				7479A6202688962500BB433F /* Skull-King iOS ClientUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7479A5FE2688962100BB433F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7479A6102688962500BB433F /* LaunchScreen.storyboard in Resources */,
+				7479A60D2688962500BB433F /* Assets.xcassets in Resources */,
+				7479A60B2688962100BB433F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7479A6142688962500BB433F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7479A61F2688962500BB433F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7479A5FC2688962100BB433F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7479A6392688A37800BB433F /* Session.swift in Sources */,
+				7479A6082688962100BB433F /* IntroViewController.swift in Sources */,
+				7479A6042688962100BB433F /* AppDelegate.swift in Sources */,
+				7479A6062688962100BB433F /* SceneDelegate.swift in Sources */,
+				74D9534C2689FE6B003524C6 /* JoinViewController.swift in Sources */,
+				7479A6372688973700BB433F /* HTTP.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7479A6122688962500BB433F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7479A61B2688962500BB433F /* Skull_King_iOS_ClientTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7479A61D2688962500BB433F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7479A6262688962500BB433F /* Skull_King_iOS_ClientUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7479A6182688962500BB433F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7479A5FF2688962100BB433F /* Skull-King iOS Client */;
+			targetProxy = 7479A6172688962500BB433F /* PBXContainerItemProxy */;
+		};
+		7479A6232688962500BB433F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7479A5FF2688962100BB433F /* Skull-King iOS Client */;
+			targetProxy = 7479A6222688962500BB433F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7479A6092688962100BB433F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7479A60A2688962100BB433F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7479A60E2688962500BB433F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7479A60F2688962500BB433F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7479A6282688962500BB433F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7479A6292688962500BB433F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7479A62B2688962500BB433F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WBB5NFBL57;
+				INFOPLIST_FILE = "Skull-King iOS Client/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.elijahgreene.Skull-King-iOS-Client";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7479A62C2688962500BB433F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WBB5NFBL57;
+				INFOPLIST_FILE = "Skull-King iOS Client/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.elijahgreene.Skull-King-iOS-Client";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7479A62E2688962500BB433F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WBB5NFBL57;
+				INFOPLIST_FILE = "Skull-King iOS ClientTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.elijahgreene.Skull-King-iOS-ClientTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Skull-King iOS Client.app/Skull-King iOS Client";
+			};
+			name = Debug;
+		};
+		7479A62F2688962500BB433F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WBB5NFBL57;
+				INFOPLIST_FILE = "Skull-King iOS ClientTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.elijahgreene.Skull-King-iOS-ClientTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Skull-King iOS Client.app/Skull-King iOS Client";
+			};
+			name = Release;
+		};
+		7479A6312688962500BB433F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WBB5NFBL57;
+				INFOPLIST_FILE = "Skull-King iOS ClientUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.elijahgreene.Skull-King-iOS-ClientUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Skull-King iOS Client";
+			};
+			name = Debug;
+		};
+		7479A6322688962500BB433F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = WBB5NFBL57;
+				INFOPLIST_FILE = "Skull-King iOS ClientUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.elijahgreene.Skull-King-iOS-ClientUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Skull-King iOS Client";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7479A5FB2688962100BB433F /* Build configuration list for PBXProject "Skull-King iOS Client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7479A6282688962500BB433F /* Debug */,
+				7479A6292688962500BB433F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7479A62A2688962500BB433F /* Build configuration list for PBXNativeTarget "Skull-King iOS Client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7479A62B2688962500BB433F /* Debug */,
+				7479A62C2688962500BB433F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7479A62D2688962500BB433F /* Build configuration list for PBXNativeTarget "Skull-King iOS ClientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7479A62E2688962500BB433F /* Debug */,
+				7479A62F2688962500BB433F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7479A6302688962500BB433F /* Build configuration list for PBXNativeTarget "Skull-King iOS ClientUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7479A6312688962500BB433F /* Debug */,
+				7479A6322688962500BB433F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7479A5F82688962100BB433F /* Project object */;
+}

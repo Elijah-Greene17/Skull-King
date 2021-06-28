@@ -161,6 +161,8 @@ app.post('/isRoundOver', (req, res) => {
         "gameIsOver": gameIsOver
     });
 
+    //TODO: Delete Session when game is over
+
 });
 
 app.listen(3001, () => {

@@ -75,6 +75,7 @@ class Session {
             points = bid * 20;
         }
         player.boxes[this.currentRound-1].points += points + bonus;
+        player.score += points + bonus;
     }
 
     failedBid(playerId, tricks){
@@ -87,6 +88,18 @@ class Session {
             points = Math.abs(bid-tricks) * -10;
         }
         player.boxes[this.currentRound-1].points += points;
+        player.score += points;
+    }
+
+    scoresAreCalculated(){
+        var scoresAreCalculated = true;
+        players.forEach(player => {
+            var points = player.boxes[this.currentRound-1].points;
+            if (points == 0){
+                scoresAreCalculated = false;
+            }
+        });
+        return scoresAreCalculated;
     }
 
 }
