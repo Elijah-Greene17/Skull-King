@@ -11,6 +11,10 @@ class Player {
     addBox(box){
         this.boxes.push(box);
     }
+
+    modifyBid(bidIncrement, round){
+        this.boxes[round-1].modifyBid(bidIncrement);
+    }
     
 }
 

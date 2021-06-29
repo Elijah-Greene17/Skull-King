@@ -19,7 +19,7 @@ class Session {
         console.log("Player ID: " + player.id+ ", Player Name: " + player.name)
         this.players.push(player);
         if (this.players.length == 1){
-            this.admin = player;
+            this.admin = player.id;
         }
 
         console.log("Player added!");
@@ -28,7 +28,7 @@ class Session {
 
     removePlayer(playerId){
         this.players = this.players.filter(player => player.id != playerId);
-        this.admin = this.players[0];
+        this.admin = this.players[0].id;
     }
 
     startGame(){
@@ -42,6 +42,7 @@ class Session {
         var json = {
             "id": this.id,
             "players": this.players,
+            "admin": this.admin,
             "scoreBoard": this.scoreboard,
             "currentRound": this.currentRound,
             "isOpen": this.isOpen
@@ -74,6 +75,11 @@ class Session {
             }
         });
         return bidsAreIn;
+    }
+
+    modifyBid(playerId, bidIncrement){
+        const player = this.getPlayer(playerId);
+        player.modifyBid(bidIncrement, this.currentRound);
     }
 
     achievedBid(playerId, bonus){

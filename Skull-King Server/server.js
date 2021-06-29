@@ -23,8 +23,8 @@ app.post('/newGame', (req, res) => {
     const session = lobby.getSession(id);
     console.log("Session: " + session)
 
-    // TODO: Make not case sensitive
-    if (name == 'Michaela') name = 'Hortense';
+    if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
+    if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
     session.addPlayer(name);
     
     const jsonSession = session.convertToJson();
@@ -41,8 +41,8 @@ app.post('/joinGame', (req, res) => {
     var name = req.body.name;
     const session = lobby.getSession(gameId)
 
-    // TODO: Make not case sensitive
-    if (name == 'Michaela') name = 'Hortense';
+    if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
+    if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
     if (session != null && session.isOpen){
         session.addPlayer(name);
         const jsonSession = session.convertToJson();
@@ -118,12 +118,28 @@ app.post('/areBidsIn', (req, res) => {
     const bidsAreIn = session.bidsAreIn();
     res.json({
         "bidsAreIn": bidsAreIn
-    })
-
-
+    });
 });
 
-//TODO: Implement Harry
+//TODO: Debug Harry
+/**
+ * param: gameId (String)
+ * param: playerId (Int)
+ * param: modifyBid (Int) //will be +1 or -1
+ */
+app.post('/Harry', (req, res) => {
+    const gameId = req.body.gameId;
+    const playerId = req.body.playerId;
+    const bidIncrement = req.body.modifyBid;
+
+    const session = lobby.getSession(gameId);
+    session.modifyBid(playerId, bidIncrement);
+
+    const jsonSession = session.convertToJson();
+    res.json(jsonSession);
+});
+
+
 //TODO: Implement Rascal
 
 // Calculate Scores
@@ -179,7 +195,6 @@ app.post('/isRoundOver', (req, res) => {
         "gameIsOver": gameIsOver
     });
 
-    //TODO: Delete Session when game is over
     if (gameIsOver){
         lobby.deleteSession(gameId);
     }
