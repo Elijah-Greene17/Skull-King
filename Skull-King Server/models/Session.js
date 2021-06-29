@@ -7,17 +7,28 @@ class Session {
         this.id = id;
         this.idTracker = 0;
         this.players = [];
+        this.admin = null;
         this.scoreboard = null;
         this.isOpen = true;
         this.currentRound = 0;
     }
 
     addPlayer(name){
+        console.log("Add Player");
         const player = new Player(this.idTracker++, name)
+        console.log("Player ID: " + player.id+ ", Player Name: " + player.name)
         this.players.push(player);
+        if (this.players.length == 1){
+            this.admin = player;
+        }
 
         console.log("Player added!");
         console.log(this.players);
+    }
+
+    removePlayer(playerId){
+        this.players = this.players.filter(player => player.id != playerId);
+        this.admin = this.players[0];
     }
 
     startGame(){

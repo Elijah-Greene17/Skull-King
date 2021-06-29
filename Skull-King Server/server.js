@@ -18,8 +18,10 @@ app.get('/', (req, res) => {
  */
 app.post('/newGame', (req, res) => {
     var name = req.body.name;
+    console.log("name: " + name);
     const id = lobby.createSession();
-    const session =  lobby.getSession(id);
+    const session = lobby.getSession(id);
+    console.log("Session: " + session)
 
     // TODO: Make not case sensitive
     if (name == 'Michaela') name = 'Hortense';
@@ -31,7 +33,7 @@ app.post('/newGame', (req, res) => {
 
 // Attempt to join an existing game
 /**
- * param: gameId (Int)
+ * param: gameId (String)
  * param: name (String)
  */
 app.post('/joinGame', (req, res) => {
@@ -57,10 +59,26 @@ app.post('/joinGame', (req, res) => {
     
 });
 
+// Remove a player from the specified Session
+/**
+ * param: gameId (String)
+ * param: playerId (Int)
+ */
+app.post('/removePlayer', (req, res) => {
+    const gameId = req.body.gameId;
+    const playerId = req.body.playerId;
+    const session = lobby.getSession(gameId);
+
+    session.removePlayer(playerId);
+
+    const jsonSession = session.convertToJson();
+    res.json(jsonSession);
+});
+
 
 // Start the game
 /**
- * param: gameId (Int)
+ * param: gameId (String)
  */
 app.post('/start', (req, res) => {
     const gameId = req.body.gameId;
@@ -73,7 +91,7 @@ app.post('/start', (req, res) => {
 
 // Input Bids
 /**
- * param: gameId (Int)
+ * param: gameId (String)
  * param: playerId (Int)
  * param: bid (Int)
  */
@@ -91,7 +109,7 @@ app.post('/bid', (req, res) => {
 
 // Checks to see if All bids are in
 /**
- * param: gameId (Int)
+ * param: gameId (String)
  */
 app.post('/areBidsIn', (req, res) => {
     const gameId = req.body.gameId;
@@ -111,7 +129,7 @@ app.post('/areBidsIn', (req, res) => {
 // Calculate Scores
 /**
  * param: playerId (Int)
- * param: gameId (Int)
+ * param: gameId (String)
  * param: bidAchieved (bool)
  * param: tricks (Int)
  * param: bonusPoints (Int)
@@ -142,7 +160,7 @@ app.post('/calculate', (req, res) => {
 
 // Check to see if everyones scores are calculated
 /**
- * param: gameId (Int)
+ * param: gameId (String)
  */
 app.post('/isRoundOver', (req, res) => {
     const gameId = req.body.gameId;
@@ -162,6 +180,9 @@ app.post('/isRoundOver', (req, res) => {
     });
 
     //TODO: Delete Session when game is over
+    if (gameIsOver){
+        lobby.deleteSession(gameId);
+    }
 
 });
 
