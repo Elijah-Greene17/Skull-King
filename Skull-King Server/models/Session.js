@@ -24,6 +24,7 @@ class Session {
 
         console.log("Player added!");
         console.log(this.players);
+        return player.id;
     }
 
     removePlayer(playerId){

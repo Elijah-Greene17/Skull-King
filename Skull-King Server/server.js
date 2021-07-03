@@ -19,16 +19,19 @@ app.get('/', (req, res) => {
 app.post('/newGame', (req, res) => {
     var name = req.body.name;
     console.log("name: " + name);
-    const id = lobby.createSession();
-    const session = lobby.getSession(id);
+    const gameId = lobby.createSession();
+    const session = lobby.getSession(gameId);
     console.log("Session: " + session)
 
     if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
     if (name.toLowerCase() == 'bridget') name = 'Devil in da skies';
-    session.addPlayer(name);
+    const playerId = session.addPlayer(name);
     
-    const jsonSession = session.convertToJson();
-    res.json(jsonSession);
+    //const jsonSession = session.convertToJson();
+    res.json({
+        "gameId": gameId,
+        "playerId": playerId
+    });
 });
 
 // Attempt to join an existing game
@@ -44,9 +47,11 @@ app.post('/joinGame', (req, res) => {
     if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
     if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
     if (session != null && session.isOpen){
-        var id = session.addPlayer(name);
+        var playerId = session.addPlayer(name);
         const jsonSession = session.convertToJson();
-        res.json(jsonSession);
+        res.json({
+            "playerId": playerId
+        });
     } else if (session == null){
         res.statusCode = 404;
         const errorJson = {"error": "Session with Id "+gameId+" does not exist"}
