@@ -13,11 +13,12 @@ class IntroViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        
-        
-        
     }
 
-
+    @IBAction func playButtonPressed(_ sender: UIButton) {
+        //self.performSegue(withIdentifier: "goToResults", sender: self)
+        self.performSegue(withIdentifier: "menuSegue", sender: self)
+    }
+    
 }
 

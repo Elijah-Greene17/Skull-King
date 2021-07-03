@@ -24,7 +24,7 @@ app.post('/newGame', (req, res) => {
     console.log("Session: " + session)
 
     if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
-    if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
+    if (name.toLowerCase() == 'bridget') name = 'Devil in da skies';
     session.addPlayer(name);
     
     const jsonSession = session.convertToJson();
@@ -44,7 +44,7 @@ app.post('/joinGame', (req, res) => {
     if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
     if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
     if (session != null && session.isOpen){
-        session.addPlayer(name);
+        var id = session.addPlayer(name);
         const jsonSession = session.convertToJson();
         res.json(jsonSession);
     } else if (session == null){
@@ -121,13 +121,13 @@ app.post('/areBidsIn', (req, res) => {
     });
 });
 
-//TODO: Debug Harry
+// Implement Harry
 /**
  * param: gameId (String)
  * param: playerId (Int)
  * param: modifyBid (Int) //will be +1 or -1
  */
-app.post('/Harry', (req, res) => {
+app.post('/harry', (req, res) => {
     const gameId = req.body.gameId;
     const playerId = req.body.playerId;
     const bidIncrement = req.body.modifyBid;
@@ -141,6 +141,26 @@ app.post('/Harry', (req, res) => {
 
 
 //TODO: Implement Rascal
+/**
+ * param: gameId (String)
+ * param: playerId (Int)
+ * param: wager (Int)
+ */
+app.post('/rascal', (req, res) => {
+    const gameId = req.body.gameId;
+    const playerId = req.body.playerId;
+    const wager = req.body.wager;
+
+    const session = lobby.getSession(gameId);
+    const player = session.getPlayer(playerId);
+    const box = player.boxes[session.currentRound-1];
+    box.setWager(wager);
+
+    const jsonSession = session.convertToJson();
+    res.json(jsonSession);
+});
+
+// TODO; Find out if Harry or Rascal Implemenntation is better
 
 // Calculate Scores
 /**

@@ -83,28 +83,42 @@ class Session {
     }
 
     achievedBid(playerId, bonus){
-        var player = this.getPlayer(playerId);
-        var bid = player.boxes[this.currentRound-1].bid;
+        const player = this.getPlayer(playerId);
+        const box = player.boxes[this.currentRound-1];
+        const bid = box.bid;
         var points = 0;
         if (bid == 0){
             points = this.currentRound * 10;
         } else {
             points = bid * 20;
         }
-        player.boxes[this.currentRound-1].points += points + bonus;
+
+        // Handle Rascal Wager
+        if (box.wager != null){
+            points += box.wager;
+        }
+
+        box.points += points + bonus;
         player.score += points + bonus;
     }
 
     failedBid(playerId, tricks){
-        var player = this.getPlayer(playerId);
-        var bid = player.boxes[this.currentRound-1].bid;
+        const player = this.getPlayer(playerId);
+        const box = player.boxes[this.currentRound-1];
+        var bid = box.bid;
         var points = 0;
         if (bid == 0) {
             points = this.currentRound * -10;
         } else {
             points = Math.abs(bid-tricks) * -10;
         }
-        player.boxes[this.currentRound-1].points += points;
+
+        // Handle Rascal Wager
+        if (box.wager != null){
+            points -= box.wager;
+        }
+
+        box.points += points;
         player.score += points;
     }
 
