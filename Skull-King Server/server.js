@@ -1,6 +1,16 @@
 const express = require('express');
 const app = express();
+const http = require('http');
+const { Server } = require('socket.io');
+
 app.use(express.json());
+
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+      origin: '*',
+    }
+  });
 const Lobby = require('./models/Lobby');
 const Player = require('./models/Player');
 
@@ -167,6 +177,7 @@ app.post('/rascal', (req, res) => {
 
 // TODO; Find out if Harry or Rascal Implemenntation is better
 
+// TODO: Fix call to calculate from tricks instead of bidAchieved
 // Calculate Scores
 /**
  * param: playerId (Int)
@@ -226,6 +237,21 @@ app.post('/isRoundOver', (req, res) => {
 
 });
 
-app.listen(3001, () => {
+// Socket Connection for player loading
+io.on('connection', (socket) => {
+    console.log('user connected');
+
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+
+    socket.on('chat message', (msg) => {
+        console.log('message2: ' + msg);
+        io.emit('chat message', msg);
+    })
+})
+
+// Run the server
+server.listen(3001, () => {
     console.log("Server is running");
 });

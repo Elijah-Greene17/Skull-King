@@ -9,7 +9,7 @@ import UIKit
 
 class StartViewController: UIViewController {
     
-    var gameId: String?
+    var gameData: GameData?
 
     @IBOutlet weak var gameIdLabel: UILabel!
     
@@ -17,7 +17,7 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        gameIdLabel.text = gameId
+        gameIdLabel.text = gameData?.gameId
     }
     
 
