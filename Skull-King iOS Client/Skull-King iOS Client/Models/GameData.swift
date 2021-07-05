@@ -10,6 +10,7 @@ import Foundation
 struct GameData: Codable {
     var playerId: Int?
     var gameId: String?
+    var error: String?
     
     
     static func parseJsonToGameData(data: Data) -> GameData?{

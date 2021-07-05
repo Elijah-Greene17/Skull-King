@@ -58,9 +58,10 @@ app.post('/joinGame', (req, res) => {
     if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
     if (session != null && session.isOpen){
         var playerId = session.addPlayer(name);
-        const jsonSession = session.convertToJson();
+        //const jsonSession = session.convertToJson();
         res.json({
-            "playerId": playerId
+            "playerId": playerId,
+            "gameId": gameId
         });
     } else if (session == null){
         res.statusCode = 404;
