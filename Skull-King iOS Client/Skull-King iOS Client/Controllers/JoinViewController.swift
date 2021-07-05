@@ -48,6 +48,9 @@ class JoinViewController: UIViewController {
     }
     
     @IBAction func joinGameBtn(_ sender: UIButton) {
+        
+        submitGameId()
+        
         //Set up Request info
         let json: [String:Any] = [
             "name": name ?? "Matey",
@@ -75,14 +78,15 @@ class JoinViewController: UIViewController {
         }
     }
     
-    func submitGameId(){
+    func submitGameId() -> Bool{
         if gameIdTextField.text == "" {
             errorLabel.text = "Please enter a Game ID"
             errorLabel.isHidden = false
+            return false
         } else {
             gameId = gameIdTextField.text?.uppercased()
+            return true
         }
-        gameIdTextField.endEditing(true)
         
     }
     
@@ -117,7 +121,7 @@ class JoinViewController: UIViewController {
 extension JoinViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        submitGameId()
+        gameIdTextField.endEditing(true)
         return true
     }
     

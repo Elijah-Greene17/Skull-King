@@ -11,12 +11,11 @@ struct GameData: Codable {
     var playerId: Int?
     var gameId: String?
     var error: String?
-    
+    var host: Int?
     
     static func parseJsonToGameData(data: Data) -> GameData?{
         let decoder = JSONDecoder()
         do {
-            print(data)
             let decodedData = try decoder.decode(GameData.self, from: data)
             print(decodedData)
             return decodedData

@@ -12,12 +12,23 @@ class StartViewController: UIViewController {
     var gameData: GameData?
 
     @IBOutlet weak var gameIdLabel: UILabel!
+    @IBOutlet weak var waitingText: UILabel!
+    @IBOutlet weak var startButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         gameIdLabel.text = gameData?.gameId
+        
+        if gameData?.host == gameData?.playerId {
+            startButton.isHidden = false
+            waitingText.isHidden = true
+        } else {
+            startButton.isHidden = true
+            waitingText.isHidden = false
+        }
+        
     }
     
 

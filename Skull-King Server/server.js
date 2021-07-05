@@ -40,7 +40,8 @@ app.post('/newGame', (req, res) => {
     //const jsonSession = session.convertToJson();
     res.json({
         "gameId": gameId,
-        "playerId": playerId
+        "playerId": playerId,
+        "host": session.admin
     });
 });
 
