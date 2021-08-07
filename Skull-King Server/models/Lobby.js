@@ -30,6 +30,7 @@ class Lobby {
         }
     }
 
+    //TODO: Implement this if not implemented
     deleteSession(id){
         this.sessions = this.sessions.filter(session => session.id != id);
     }

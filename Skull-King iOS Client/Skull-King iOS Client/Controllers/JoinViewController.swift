@@ -49,22 +49,22 @@ class JoinViewController: UIViewController {
     
     @IBAction func joinGameBtn(_ sender: UIButton) {
         
-        submitGameId()
-        
-        //Set up Request info
-        let json: [String:Any] = [
-            "name": name ?? "Matey",
-            "gameId": gameId!
-        ]
-        
-        getGameData(json: json, type: "joinGame")
-        
-        if gameData?.error != nil {
-            errorLabel.text = "Invalid Game ID"
-            errorLabel.isHidden = false
-        }
-        else {
-            self.performSegue(withIdentifier: "goToStartScreen", sender: self)
+        if submitGameId() {
+            //Set up Request info
+            let json: [String:Any] = [
+                "name": name ?? "Matey",
+                "gameId": gameId!
+            ]
+            
+            getGameData(json: json, type: "joinGame")
+            
+            if gameData?.error != nil {
+                errorLabel.text = "Invalid Game ID"
+                errorLabel.isHidden = false
+            }
+            else {
+                self.performSegue(withIdentifier: "goToStartScreen", sender: self)
+            }
         }
         
     }

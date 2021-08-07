@@ -62,7 +62,8 @@ app.post('/joinGame', (req, res) => {
         //const jsonSession = session.convertToJson();
         res.json({
             "playerId": playerId,
-            "gameId": gameId
+            "gameId": gameId,
+            "host": session.admin
         });
     } else if (session == null){
         res.statusCode = 404;
@@ -239,10 +240,21 @@ app.post('/isRoundOver', (req, res) => {
 
 });
 
+app.post('/pingClient', (req, res) => {
+    io.emit("pingClient", {msg: "Hi Client!"});
+    res.send('Success');
+});
+
 // Socket Connection for player loading
 io.on('connection', (socket) => {
     console.log('user connected');
 
+    
+    socket.on('pingSocket', (msg) => {
+        console.log('Socket Pinged: ' + msg);
+    });
+
+    /*
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });
@@ -251,6 +263,8 @@ io.on('connection', (socket) => {
         console.log('message2: ' + msg);
         io.emit('chat message', msg);
     })
+    */
+
 })
 
 // Run the server
