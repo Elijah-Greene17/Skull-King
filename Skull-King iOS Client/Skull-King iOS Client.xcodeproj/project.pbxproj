@@ -11,7 +11,9 @@
 		74110DA0268A757B0048AA25 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74110D9F268A757B0048AA25 /* StartViewController.swift */; };
 		74110DA22691E7290048AA25 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74110DA12691E7290048AA25 /* GameData.swift */; };
 		74110DA4269372E00048AA25 /* SocketIO in Resources */ = {isa = PBXBuildFile; fileRef = 74110DA3269372E00048AA25 /* SocketIO */; };
-		74110DA7269912480048AA25 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 74110DA6269912480048AA25 /* SocketIO */; };
+		7457676726BF3361001EB38F /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 7457676626BF3361001EB38F /* SocketIO */; };
+		745767A826C2A718001EB38F /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745767A726C2A718001EB38F /* Socket.swift */; };
+		745767AA26C3EEF8001EB38F /* Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745767A926C3EEF8001EB38F /* Validate.swift */; };
 		7479A6042688962100BB433F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6032688962100BB433F /* AppDelegate.swift */; };
 		7479A6062688962100BB433F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6052688962100BB433F /* SceneDelegate.swift */; };
 		7479A6082688962100BB433F /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7479A6072688962100BB433F /* IntroViewController.swift */; };
@@ -47,6 +49,8 @@
 		74110D9F268A757B0048AA25 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		74110DA12691E7290048AA25 /* GameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		74110DA3269372E00048AA25 /* SocketIO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SocketIO; path = "Skull-King iOS Client/SocketIO"; sourceTree = SOURCE_ROOT; };
+		745767A726C2A718001EB38F /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		745767A926C3EEF8001EB38F /* Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validate.swift; sourceTree = "<group>"; };
 		7479A6002688962100BB433F /* Skull-King iOS Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Skull-King iOS Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7479A6032688962100BB433F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7479A6052688962100BB433F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74110DA7269912480048AA25 /* SocketIO in Frameworks */,
+				7457676726BF3361001EB38F /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +175,8 @@
 				7479A6362688973700BB433F /* HTTP.swift */,
 				7479A6382688A37800BB433F /* Session.swift */,
 				74110DA12691E7290048AA25 /* GameData.swift */,
+				745767A726C2A718001EB38F /* Socket.swift */,
+				745767A926C3EEF8001EB38F /* Validate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -192,7 +198,7 @@
 			);
 			name = "Skull-King iOS Client";
 			packageProductDependencies = (
-				74110DA6269912480048AA25 /* SocketIO */,
+				7457676626BF3361001EB38F /* SocketIO */,
 			);
 			productName = "Skull-King iOS Client";
 			productReference = 7479A6002688962100BB433F /* Skull-King iOS Client.app */;
@@ -266,7 +272,7 @@
 			);
 			mainGroup = 7479A5F72688962100BB433F;
 			packageReferences = (
-				74110DA5269912480048AA25 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				7457676526BF3361001EB38F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = 7479A6012688962100BB433F /* Products */;
 			projectDirPath = "";
@@ -312,8 +318,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				745767AA26C3EEF8001EB38F /* Validate.swift in Sources */,
 				7479A6392688A37800BB433F /* Session.swift in Sources */,
 				74110DA0268A757B0048AA25 /* StartViewController.swift in Sources */,
+				745767A826C2A718001EB38F /* Socket.swift in Sources */,
 				7479A6082688962100BB433F /* IntroViewController.swift in Sources */,
 				7479A6042688962100BB433F /* AppDelegate.swift in Sources */,
 				7479A6062688962100BB433F /* SceneDelegate.swift in Sources */,
@@ -655,20 +663,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		74110DA5269912480048AA25 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+		7457676526BF3361001EB38F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 16.0.0;
+				minimumVersion = 16.0.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		74110DA6269912480048AA25 /* SocketIO */ = {
+		7457676626BF3361001EB38F /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 74110DA5269912480048AA25 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			package = 7457676526BF3361001EB38F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */

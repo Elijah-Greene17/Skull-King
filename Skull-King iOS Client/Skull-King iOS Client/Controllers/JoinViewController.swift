@@ -10,9 +10,12 @@ import UIKit
 class JoinViewController: UIViewController {
 
     var session: Session?
-    var gameData: GameData?
+    //var gameData: GameData?
     var name: String?
     var gameId: String?
+    
+    var json: [String:Any]?
+    var type: String?
     
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var errorLabel: UILabel!
@@ -37,12 +40,11 @@ class JoinViewController: UIViewController {
     }
     
     @IBAction func createGameBtn(_ sender: UIButton) {
-        //Set up Request info
-        let json: [String:Any] = [
+        
+        json = [
             "name": name ?? "Matey"
         ]
-        
-        getGameData(json: json, type: "newGame")
+        type = "newGame"
         
         self.performSegue(withIdentifier: "goToStartScreen", sender: self)
     }
@@ -51,13 +53,14 @@ class JoinViewController: UIViewController {
         
         if submitGameId() {
             //Set up Request info
-            let json: [String:Any] = [
+            json = [
                 "name": name ?? "Matey",
                 "gameId": gameId!
             ]
+            type = "joinGame"
             
-            getGameData(json: json, type: "joinGame")
-            
+            self.performSegue(withIdentifier: "goToStartScreen", sender: self)
+            /*
             if gameData?.error != nil {
                 errorLabel.text = "Invalid Game ID"
                 errorLabel.isHidden = false
@@ -65,10 +68,12 @@ class JoinViewController: UIViewController {
             else {
                 self.performSegue(withIdentifier: "goToStartScreen", sender: self)
             }
+            */
         }
         
     }
     
+    /*
     func getGameData(json: [String:Any], type: String) {
         if let data = HTTP.post(url: "http://localhost:3001/\(type)", json: json){
             if let parsedData = GameData.parseJsonToGameData(data: data) {
@@ -77,6 +82,7 @@ class JoinViewController: UIViewController {
             }
         }
     }
+     */
     
     func submitGameId() -> Bool{
         if gameIdTextField.text == "" {
@@ -94,7 +100,9 @@ class JoinViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToStartScreen" {
             let destinationVC = segue.destination as! StartViewController
-            destinationVC.gameData = gameData
+            destinationVC.json = json
+            destinationVC.type = type
+            
             
         }
     }

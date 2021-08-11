@@ -9,7 +9,8 @@ import UIKit
 
 class StartViewController: UIViewController {
     
-    var gameData: GameData?
+    var json: [String: Any]?
+    var type: String?
 
     @IBOutlet weak var gameIdLabel: UILabel!
     @IBOutlet weak var waitingText: UILabel!
@@ -19,6 +20,7 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        /*
         gameIdLabel.text = gameData?.gameId
         
         if gameData?.host == gameData?.playerId {
@@ -28,6 +30,7 @@ class StartViewController: UIViewController {
             startButton.isHidden = true
             waitingText.isHidden = false
         }
+         */
         
     }
     

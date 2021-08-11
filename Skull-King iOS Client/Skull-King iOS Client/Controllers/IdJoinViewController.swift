@@ -10,7 +10,7 @@ import SocketIO
 
 class IdJoinViewController: UIViewController {
     
-    let manager = SocketManager(socketURL: URL(string: "192.168.1.24:3001")!, config: [.log(true), .compress])
+    let manager = SocketManager(socketURL: URL(string: "http://localhost:3001")!, config: [.log(true), .compress])
     var socket: SocketIOClient?
 
     override func viewDidLoad() {
@@ -29,6 +29,21 @@ class IdJoinViewController: UIViewController {
         socket?.on("pingClient") {data, ack in
             print("EG client pinged: \(data[0])")
         }
+        
+        socket?.on("error") {data, ack in
+            let myData = data[0]
+            print(myData)
+        }
+        
+        socket?.on("newGame") {data, ack in
+            let myData = data[0]
+            print("EG newGame Created: \(myData)")
+        }
+        
+        socket?.on("joinGame") {data, ack in
+            let myData = data[0]
+            print("EG joined Game: \(myData)")
+        }
  
         
         socket!.connect()
@@ -37,7 +52,14 @@ class IdJoinViewController: UIViewController {
     }
 
     @IBAction func goPressed(_ sender: UIButton) {
-        socket?.emit("pingSocket", "Test")
+        
+        //socket?.emit("newGame", ["name": "Elijah"])
+        let joinJson = [
+            "name": "Mitchel",
+            "gameId": "62V7"
+        ]
+        socket?.emit("joinGame", joinJson)
+        
     }
     
     /*
