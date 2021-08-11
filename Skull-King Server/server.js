@@ -11,11 +11,10 @@ const io = new Server(server, {
       origin: '*',
     }
   })
-
 const Lobby = require('./models/Lobby')
 const Player = require('./models/Player')
 
-let lobby = new Lobby('FamDamily')
+var lobby = new Lobby('FamDamily')
 
 // Socket Connection for player loading
 io.on('connection', (socket) => {
@@ -25,12 +24,18 @@ io.on('connection', (socket) => {
         console.log('Socket Pinged: ' + msg)
     })
 
-    // Initiate new game
-    /**
-     * param: name (String)
-     */
-    socket.on('newGame', (req) => {
-        let name = req.name
+    /*
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+    socket.on('chat message', (msg) => {
+        console.log('message2: ' + msg);
+        io.emit('chat message', msg);
+    })
+    */
+
+    socket.on('newGame', (data) => {
+        let name = data.name
         console.log("name: " + name)
         const gameId = lobby.createSession()
         const session = lobby.getSession(gameId)
@@ -39,12 +44,12 @@ io.on('connection', (socket) => {
         if (name.toLowerCase() == 'michaela') name = 'HORTENSE'
         if (name.toLowerCase() == 'bridget') name = 'Devil in da skies'
         const playerId = session.addPlayer(name)
-        
-        //const jsonSession = session.convertToJson()
-        io.emit('newGame', {
-            "gameId": gameId,
-            "playerId": playerId,
-            "host": session.admin
+
+        socket.emit("gameCreated", {
+            gameId : gameId,
+            playerId : playerId,
+            host : session.admin,
+            playerList : session.players.map((i) => { return i.name })
         })
     })
 
@@ -53,32 +58,33 @@ io.on('connection', (socket) => {
      * param: gameId (String)
      * param: name (String)
      */
-    socket.on('joinGame', (req) => {
-        console.log("Join Game")
-        const gameId = req.gameId
-        let name = req.name
+    socket.on('joinGame', (data) => {
+        
+        const gameId = data.gameId
+        let name = data.name
         const session = lobby.getSession(gameId)
 
         if (name.toLowerCase() == 'michaela') name = 'HORTENSE'
         if (name.toLowerCase() == 'bridget') name = 'Devil in disguise'
-        if (session != null && session.isOpen){
+        if (session != null && session.isOpen) {
             let playerId = session.addPlayer(name)
-
-            io.emit('joinGame', {
-                playerId: playerId,
-                gameId: gameId,
-                host: session.admin,
-                players: playerList = session.players.map((i) => { return i.name })
+            
+            socket.emit("gameJoined", {
+                gameId : gameId,
+                playerId : playerId,
+                host : session.admin,
+                playerList : session.players.map((i) => { return i.name })
             })
-
-        } else if (session == null){
-            const errorJson = {"error": "Session with Id "+gameId+" does not exist"}
-            io.emit("error", errorJson)
         } else {
-            const errorJson = {"error": "Game with Id "+gameId+" has already started"}
-            io.emit("error", errorJson)
+            var errorJson
+            if (session == null) {
+                errorJson = {"error": "Session with Id "+gameId+" does not exist"}
+            } else {
+                errorJson = {"error": "Game with Id "+gameId+" has already started"}
+            }
+
+            socket.emit("gameJoined", errorJson)
         }
-        
     })
 
     // Remove a player from the specified Session
