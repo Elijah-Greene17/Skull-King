@@ -1,5 +1,5 @@
 class Box {
-    constructor(roundNumber){
+    constructor(roundNumber) {
         this.roundNumber = roundNumber;
         this.bid = null;
         this.points = 0;
@@ -7,11 +7,11 @@ class Box {
         this.wager = null;
     }
 
-    modifyBid(bidIncrement){
+    modifyBid(bidIncrement) {
         this.bid += bidIncrement;
     }
 
-    setWager(wager){
+    setWager(wager) {
         this.wager = wager;
     }
 }

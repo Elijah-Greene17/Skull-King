@@ -1,28 +1,28 @@
-const express = require('express')
-const app = express()
-const http = require('http')
-const { Server } = require('socket.io')
+const express = require('express');
+const app = express();
+const http = require('http');
+const { Server } = require('socket.io');
 
-app.use(express.json())
+app.use(express.json());
 
-const server = http.createServer(app)
+const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-      origin: '*',
-    }
-  })
-const Lobby = require('./models/Lobby')
-const Player = require('./models/Player')
+        origin: '*',
+    },
+});
+const Lobby = require('./models/Lobby');
+const Player = require('./models/Player');
 
-var lobby = new Lobby('FamDamily')
+var lobby = new Lobby('FamDamily');
 
 // Socket Connection for player loading
 io.on('connection', (socket) => {
-    console.log('user connected')
+    console.log('user connected');
 
     socket.on('pingSocket', (msg) => {
-        console.log('Socket Pinged: ' + msg)
-    })
+        console.log('Socket Pinged: ' + msg);
+    });
 
     /*
     socket.on('disconnect', () => {
@@ -35,23 +35,25 @@ io.on('connection', (socket) => {
     */
 
     socket.on('newGame', (data) => {
-        let name = data.name
-        console.log("name: " + name)
-        const gameId = lobby.createSession()
-        const session = lobby.getSession(gameId)
-        console.log("Session: " + session.id)
+        let name = data.name;
+        console.log('name: ' + name);
+        const gameId = lobby.createSession();
+        const session = lobby.getSession(gameId);
+        console.log('Session: ' + session.id);
 
-        if (name.toLowerCase() == 'michaela') name = 'HORTENSE'
-        if (name.toLowerCase() == 'bridget') name = 'Devil in da skies'
-        const playerId = session.addPlayer(name)
+        if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
+        if (name.toLowerCase() == 'bridget') name = 'Devil in da skies';
+        const playerId = session.addPlayer(name);
 
-        socket.emit("gameCreated", {
-            gameId : gameId,
-            playerId : playerId,
-            host : session.admin,
-            playerList : session.players.map((i) => { return i.name })
-        })
-    })
+        socket.emit('gameCreated', {
+            gameId: gameId,
+            playerId: playerId,
+            host: session.admin,
+            playerList: session.players.map((i) => {
+                return i.name;
+            }),
+        });
+    });
 
     // Attempt to join an existing game
     /**
@@ -59,33 +61,38 @@ io.on('connection', (socket) => {
      * param: name (String)
      */
     socket.on('joinGame', (data) => {
-        
-        const gameId = data.gameId
-        let name = data.name
-        const session = lobby.getSession(gameId)
+        const gameId = data.gameId;
+        let name = data.name;
+        const session = lobby.getSession(gameId);
 
-        if (name.toLowerCase() == 'michaela') name = 'HORTENSE'
-        if (name.toLowerCase() == 'bridget') name = 'Devil in disguise'
+        if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
+        if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
         if (session != null && session.isOpen) {
-            let playerId = session.addPlayer(name)
-            
-            socket.emit("gameJoined", {
-                gameId : gameId,
-                playerId : playerId,
-                host : session.admin,
-                playerList : session.players.map((i) => { return i.name })
-            })
+            let playerId = session.addPlayer(name);
+
+            socket.emit('gameJoined', {
+                gameId: gameId,
+                playerId: playerId,
+                host: session.admin,
+                playerList: session.players.map((i) => {
+                    return i.name;
+                }),
+            });
         } else {
-            var errorJson
+            var errorJson;
             if (session == null) {
-                errorJson = {"error": "Session with Id "+gameId+" does not exist"}
+                errorJson = {
+                    error: 'Session with Id ' + gameId + ' does not exist',
+                };
             } else {
-                errorJson = {"error": "Game with Id "+gameId+" has already started"}
+                errorJson = {
+                    error: 'Game with Id ' + gameId + ' has already started',
+                };
             }
 
-            socket.emit("gameJoined", errorJson)
+            socket.emit('gameJoined', errorJson);
         }
-    })
+    });
 
     // Remove a player from the specified Session
     /**
@@ -93,29 +100,28 @@ io.on('connection', (socket) => {
      * param: playerId (Int)
      */
     socket.on('removePlayer', (req) => {
-        const gameId = req.gameId
-        const playerId = req.playerId
-        const session = lobby.getSession(gameId)
+        const gameId = req.gameId;
+        const playerId = req.playerId;
+        const session = lobby.getSession(gameId);
 
-        session.removePlayer(playerId)
+        session.removePlayer(playerId);
 
-        const jsonSession = session.convertToJson()
-        io.emit('removePlayer', jsonSession)
-    })
-
+        const jsonSession = session.convertToJson();
+        io.emit('removePlayer', jsonSession);
+    });
 
     // Start the game
     /**
      * param: gameId (String)
      */
     socket.on('start', (req) => {
-        const gameId = req.gameId
-        const session = lobby.getSession(gameId)
-        session.startGame()
+        const gameId = req.gameId;
+        const session = lobby.getSession(gameId);
+        session.startGame();
 
-        const jsonSession = session.convertToJson()
-        io.emit('start', jsonSession)
-    })
+        const jsonSession = session.convertToJson();
+        io.emit('start', jsonSession);
+    });
 
     // Input Bids
     /**
@@ -124,30 +130,29 @@ io.on('connection', (socket) => {
      * param: bid (Int)
      */
     socket.on('bid', (req) => {
-        const playerId = req.playerId
-        const gameId = req.gameId
-        const bid = req.bid
+        const playerId = req.playerId;
+        const gameId = req.gameId;
+        const bid = req.bid;
 
-        const session = lobby.getSession(gameId)
-        session.setBid(playerId, bid)
-        const jsonSession = session.convertToJson()
-        io.emit('bid', jsonSession)
-
-    })
+        const session = lobby.getSession(gameId);
+        session.setBid(playerId, bid);
+        const jsonSession = session.convertToJson();
+        io.emit('bid', jsonSession);
+    });
 
     // Checks to see if All bids are in
     /**
      * param: gameId (String)
      */
     socket.on('areBidsIn', (req) => {
-        const gameId = req.gameId
-        const session = lobby.getSession(gameId)
+        const gameId = req.gameId;
+        const session = lobby.getSession(gameId);
 
-        const bidsAreIn = session.bidsAreIn()
+        const bidsAreIn = session.bidsAreIn();
         io.emit('bid', {
-            "bidsAreIn": bidsAreIn
-        })
-    })
+            bidsAreIn: bidsAreIn,
+        });
+    });
 
     // Implement Harry
     /**
@@ -156,17 +161,16 @@ io.on('connection', (socket) => {
      * param: modifyBid (Int) //will be +1 or -1
      */
     socket.on('harry', (req) => {
-        const gameId = req.gameId
-        const playerId = req.playerId
-        const bidIncrement = req.modifyBid
+        const gameId = req.gameId;
+        const playerId = req.playerId;
+        const bidIncrement = req.modifyBid;
 
-        const session = lobby.getSession(gameId)
-        session.modifyBid(playerId, bidIncrement)
+        const session = lobby.getSession(gameId);
+        session.modifyBid(playerId, bidIncrement);
 
-        const jsonSession = session.convertToJson()
-        io.emit('harry', jsonSession)
-    })
-
+        const jsonSession = session.convertToJson();
+        io.emit('harry', jsonSession);
+    });
 
     //TODO: Implement Rascal
     /**
@@ -175,18 +179,18 @@ io.on('connection', (socket) => {
      * param: wager (Int)
      */
     socket.on('rascal', (req) => {
-        const gameId = req.gameId
-        const playerId = req.playerId
-        const wager = req.wager
+        const gameId = req.gameId;
+        const playerId = req.playerId;
+        const wager = req.wager;
 
-        const session = lobby.getSession(gameId)
-        const player = session.getPlayer(playerId)
-        const box = player.boxes[session.currentRound-1]
-        box.setWager(wager)
+        const session = lobby.getSession(gameId);
+        const player = session.getPlayer(playerId);
+        const box = player.boxes[session.currentRound - 1];
+        box.setWager(wager);
 
-        const jsonSession = session.convertToJson()
-        io.emit('rascal', jsonSession)
-    })
+        const jsonSession = session.convertToJson();
+        io.emit('rascal', jsonSession);
+    });
 
     // TODO Find out if Harry or Rascal Implemenntation is better
 
@@ -200,60 +204,61 @@ io.on('connection', (socket) => {
      * param: bonusPoints (Int)
      */
     socket.on('calculate', (req) => {
-        const playerId = req.playerId
-        const gameId = req.gameId
-        const bidAchieved = req.bidAchieved
-        const tricks = req.tricks
-        const bonus = req.bonusPoints
+        const playerId = req.playerId;
+        const gameId = req.gameId;
+        const bidAchieved = req.bidAchieved;
+        const tricks = req.tricks;
+        const bonus = req.bonusPoints;
 
-        const session = lobby.getSession(gameId)
-        
-        if(bidAchieved){
-            session.achievedBid(playerId, bonus)
-            const jsonSession = session.convertToJson()
-            io.emit(jsonSession)
-            console.log(jsonSession)
+        const session = lobby.getSession(gameId);
+
+        if (bidAchieved) {
+            session.achievedBid(playerId, bonus);
+            const jsonSession = session.convertToJson();
+            io.emit(jsonSession);
+            console.log(jsonSession);
         } else {
-            session.failedBid(playerId, tricks)
-            const jsonSession = session.convertToJson()
-            io.emit(jsonSession)
-            console.log('calculate', jsonSession)
+            session.failedBid(playerId, tricks);
+            const jsonSession = session.convertToJson();
+            io.emit(jsonSession);
+            console.log('calculate', jsonSession);
         }
-
-
-    })
+    });
 
     // Check to see if everyones scores are calculated
     /**
      * param: gameId (String)
      */
     socket.on('isRoundOver', (req) => {
-        const gameId = req.gameId
+        const gameId = req.gameId;
 
-        const session = lobby.getSession(gameId)
+        const session = lobby.getSession(gameId);
 
-        var roundIsOver = session.scoresAreCalculated()
-        var gameIsOver = roundIsOver && session.currentRound == 10
+        var roundIsOver = session.scoresAreCalculated();
+        var gameIsOver = roundIsOver && session.currentRound == 10;
 
-        if(roundIsOver){
-            session.currentRound++
+        if (roundIsOver) {
+            session.currentRound++;
         }
 
         io.emit('isRoundOver', {
-            "roundIsOver": roundIsOver,
-            "gameIsOver": gameIsOver
-        })
+            roundIsOver: roundIsOver,
+            gameIsOver: gameIsOver,
+        });
 
-        if (gameIsOver){
-            lobby.deleteSession(gameId)
+        if (gameIsOver) {
+            lobby.deleteSession(gameId);
         }
+    });
 
-    })
+    app.get('/idExists', (req, res) => {
+        console.log('idExists');
+    });
 
     app.post('/pingClient', (req, res) => {
-        io.emit("pingClient", {msg: "Hi Client!"})
-        res.send('Success')
-    })
+        io.emit('pingClient', { msg: 'Hi Client!' });
+        res.send('Success');
+    });
 
     /*
     socket.on('disconnect', () => {
@@ -265,10 +270,9 @@ io.on('connection', (socket) => {
         io.emit('chat message', msg)
     })
     */
-
-})
+});
 
 // Run the server
 server.listen(3001, () => {
-    console.log("Server is running")
-})
+    console.log('Server is running');
+});
