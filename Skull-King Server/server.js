@@ -1,8 +1,14 @@
 const express = require('express');
+var cors = require('cors');
 const app = express();
 const http = require('http');
 const { Server } = require('socket.io');
 
+app.use(
+    cors({
+        origin: '*',
+    })
+);
 app.use(express.json());
 
 const server = http.createServer(app);
@@ -253,6 +259,7 @@ io.on('connection', (socket) => {
 
     app.get('/idExists', (req, res) => {
         console.log('idExists');
+        res.json({ status: 'success' });
     });
 
     app.post('/pingClient', (req, res) => {
