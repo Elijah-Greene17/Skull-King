@@ -22,6 +22,18 @@ const Player = require('./models/Player');
 
 var lobby = new Lobby('FamDamily');
 
+// Basic HTTP requests
+app.get('/', (req, res) => {
+    console.log('Ping');
+    //res.json({ status: 'success' });
+    res.send('Ping');
+});
+
+app.get('/idExists', (req, res) => {
+    console.log('idExists');
+    res.json({ status: 'success' });
+});
+
 // Socket Connection for player loading
 io.on('connection', (socket) => {
     console.log('user connected');
@@ -256,17 +268,6 @@ io.on('connection', (socket) => {
             lobby.deleteSession(gameId);
         }
     });
-
-    app.get('/idExists', (req, res) => {
-        console.log('idExists');
-        res.json({ status: 'success' });
-    });
-
-    app.post('/pingClient', (req, res) => {
-        io.emit('pingClient', { msg: 'Hi Client!' });
-        res.send('Success');
-    });
-
     /*
     socket.on('disconnect', () => {
         console.log('user disconnected')
