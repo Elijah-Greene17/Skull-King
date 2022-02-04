@@ -29,9 +29,23 @@ app.get('/', (req, res) => {
     res.send('Ping');
 });
 
-app.get('/idExists', (req, res) => {
-    console.log('idExists');
-    res.json({ status: 'success' });
+app.get('/idExists/:id', (req, res) => {
+    console.log('idExists: ', req.params.id);
+    res.json({ idExists: lobby.getSession(req.body.id) !== null });
+});
+
+app.post('/createNewGame', (req, res) => {
+    let name = req.body.name;
+    console.log('name: ' + name);
+    const gameId = lobby.createSession();
+    const session = lobby.getSession(gameId);
+    console.log('Session: ' + session.id);
+
+    if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
+    if (name.toLowerCase() == 'bridget') name = 'Devil in da skies';
+    const playerId = session.addPlayer(name);
+
+    res.json({ id: gameId });
 });
 
 // Socket Connection for player loading
@@ -52,6 +66,10 @@ io.on('connection', (socket) => {
     })
     */
 
+    // Attempt to create a game
+    /**
+     * param: name (String)
+     */
     socket.on('newGame', (data) => {
         let name = data.name;
         console.log('name: ' + name);
