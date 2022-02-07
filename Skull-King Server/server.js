@@ -31,7 +31,8 @@ app.get('/', (req, res) => {
 
 app.get('/idExists/:id', (req, res) => {
     console.log('idExists: ', req.params.id);
-    res.json({ idExists: lobby.getSession(req.body.id) !== null });
+    console.log(lobby);
+    res.json({ idExists: lobby.getSession(req.params.id) !== null });
 });
 
 app.post('/createNewGame', (req, res) => {

@@ -21,7 +21,9 @@ class Lobby {
     }
 
     getSession(id) {
-        const result = this.sessions.filter((session) => session.id == id);
+        console.log('1 ', id);
+        console.log(this.sessions.length);
+        const result = this.sessions.filter((session) => session.id === id);
         if (result.length > 0) {
             return result[0];
         } else {
