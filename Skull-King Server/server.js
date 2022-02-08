@@ -55,6 +55,14 @@ io.on('connection', (socket) => {
 
     socket.on('pingSocket', (msg) => {
         console.log('Socket Pinged: ' + msg);
+        socket.emit('pingClient', 'Hello from Server!');
+    });
+
+    // Assign to room
+    socket.on('joinRoom', (gameId) => {
+        console.log('User joining room ', gameId);
+        socket.join(gameId);
+        //io.in('game').emit('message', 'cool game');
     });
 
     /*
@@ -71,26 +79,26 @@ io.on('connection', (socket) => {
     /**
      * param: name (String)
      */
-    socket.on('newGame', (data) => {
-        let name = data.name;
-        console.log('name: ' + name);
-        const gameId = lobby.createSession();
-        const session = lobby.getSession(gameId);
-        console.log('Session: ' + session.id);
+    // socket.on('newGame', (data) => {
+    //     let name = data.name;
+    //     console.log('name: ' + name);
+    //     const gameId = lobby.createSession();
+    //     const session = lobby.getSession(gameId);
+    //     console.log('Session: ' + session.id);
 
-        if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
-        if (name.toLowerCase() == 'bridget') name = 'Devil in da skies';
-        const playerId = session.addPlayer(name);
+    //     if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
+    //     if (name.toLowerCase() == 'bridget') name = 'Devil in da skies';
+    //     const playerId = session.addPlayer(name);
 
-        socket.emit('gameCreated', {
-            gameId: gameId,
-            playerId: playerId,
-            host: session.admin,
-            playerList: session.players.map((i) => {
-                return i.name;
-            }),
-        });
-    });
+    //     socket.emit('gameCreated', {
+    //         gameId: gameId,
+    //         playerId: playerId,
+    //         host: session.admin,
+    //         playerList: session.players.map((i) => {
+    //             return i.name;
+    //         }),
+    //     });
+    // });
 
     // Attempt to join an existing game
     /**
