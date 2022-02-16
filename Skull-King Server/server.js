@@ -42,9 +42,9 @@ app.post('/createNewGame', (req, res) => {
     const session = lobby.getSession(gameId);
     console.log('Session: ' + session.id);
 
-    if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
-    if (name.toLowerCase() == 'bridget') name = 'Devil in da skies';
-    const playerId = session.addPlayer(name);
+    // if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
+    // if (name.toLowerCase() == 'bridget') name = 'Devil in da skies';
+    // const playerId = session.addPlayer(name);
 
     res.json({ id: gameId });
 });
@@ -62,7 +62,9 @@ io.on('connection', (socket) => {
     socket.on('joinRoom', (gameId) => {
         console.log('User joining room ', gameId);
         socket.join(gameId);
-        //io.in('game').emit('message', 'cool game');
+        const players = lobby.getSession(gameId).players;
+        io.in(gameId).emit('message', 'cool game');
+        io.in(gameId).emit('setPlayerList', players);
     });
 
     /*
@@ -110,19 +112,24 @@ io.on('connection', (socket) => {
         let name = data.name;
         const session = lobby.getSession(gameId);
 
+        console.log('User joining room ', gameId);
+        socket.join(gameId);
+
         if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
         if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
         if (session != null && session.isOpen) {
             let playerId = session.addPlayer(name);
 
-            socket.emit('gameJoined', {
+            io.in(gameId).emit('gameJoined', {
                 gameId: gameId,
                 playerId: playerId,
                 host: session.admin,
-                playerList: session.players.map((i) => {
-                    return i.name;
+                playerList: session.players.map((player) => {
+                    return player;
                 }),
             });
+
+            socket.emit('setPlayerId', playerId);
         } else {
             var errorJson;
             if (session == null) {

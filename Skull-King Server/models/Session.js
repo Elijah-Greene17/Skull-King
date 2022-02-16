@@ -19,7 +19,7 @@ class Session {
             'Player ID: ' + player.id + ', Player Name: ' + player.name
         );
         this.players.push(player);
-        if (this.players.length == 1) {
+        if (this.players.length === 1) {
             this.admin = player.id;
         }
 
