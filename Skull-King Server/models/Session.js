@@ -12,9 +12,10 @@ class Session {
         this.currentRound = 0;
     }
 
-    addPlayer(name) {
+    addPlayer(name, socketId) {
         console.log('Add Player');
-        const player = new Player(this.idTracker++, name);
+        const player = new Player(this.idTracker++, name, socketId);
+        player.gameId = this.gameId;
         console.log(
             'Player ID: ' + player.id + ', Player Name: ' + player.name
         );
@@ -29,8 +30,16 @@ class Session {
     }
 
     removePlayer(playerId) {
-        this.players = this.players.filter((player) => player.id != playerId);
+        console.log(playerId);
+        console.log(this.players.length);
+        //this.players = this.players.filter((player) => player.id != playerId);
+        const index = this.players.indexOf(playerId);
+        if (index > -1) {
+            this.players.splice(index, 1);
+        }
+        console.log(this.players.length);
         this.admin = this.players[0].id;
+        console.log(this.players.length);
     }
 
     startGame() {
@@ -53,13 +62,19 @@ class Session {
     }
 
     getPlayer(playerId) {
-        var rightPlayer = null;
+        let rightPlayer = null;
         this.players.forEach((player) => {
-            console.log('EG 1: ' + player.id + ' EG 2: ' + playerId);
             if (player.id == playerId) {
-                console.log(
-                    'EG 3: ' + 'Yup ' + player.id + player.name + player.score
-                );
+                rightPlayer = player;
+            }
+        });
+        return rightPlayer;
+    }
+
+    getPlayerBySocketId(socketId) {
+        let rightPlayer = null;
+        this.players.forEach((player) => {
+            if (player.socketId == socketId) {
                 rightPlayer = player;
             }
         });

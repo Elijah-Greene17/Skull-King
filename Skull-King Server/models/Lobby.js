@@ -31,6 +31,16 @@ class Lobby {
         }
     }
 
+    getSessionBySocketId(socketId) {
+        let rightSession = null;
+        this.sessions.forEach((session) => {
+            if (session.getPlayerBySocketId(socketId)) {
+                rightSession = session;
+            }
+        });
+        return rightSession;
+    }
+
     //TODO: Implement this if not implemented
     deleteSession(id) {
         this.sessions = this.sessions.filter((session) => session.id != id);

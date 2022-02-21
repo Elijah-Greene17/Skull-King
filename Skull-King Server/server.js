@@ -118,7 +118,7 @@ io.on('connection', (socket) => {
         if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
         if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
         if (session != null && session.isOpen) {
-            let playerId = session.addPlayer(name);
+            let playerId = session.addPlayer(name, socket.id);
 
             io.in(gameId).emit('gameJoined', {
                 gameId: gameId,
@@ -302,16 +302,26 @@ io.on('connection', (socket) => {
             lobby.deleteSession(gameId);
         }
     });
-    /*
-    socket.on('disconnect', () => {
-        console.log('user disconnected')
-    })
 
-    socket.on('chat message', (msg) => {
-        console.log('message2: ' + msg)
-        io.emit('chat message', msg)
-    })
-    */
+    socket.on('disconnect', () => {
+        console.log('user disconnected: ', socket.id);
+        const session = lobby.getSessionBySocketId(socket.id);
+        console.log('RM: Session ID -', session.id);
+        const player = session.getPlayerBySocketId(socket.id);
+        console.log('RM: Player ID -', player.id);
+
+        if (player != null) {
+            session.removePlayer(player.id);
+
+            const jsonSession = session.convertToJson();
+            io.emit('removePlayer', jsonSession);
+        }
+    });
+
+    // socket.on('chat message', (msg) => {
+    //     console.log('message2: ' + msg)
+    //     io.emit('chat message', msg)
+    // })
 });
 
 // Run the server

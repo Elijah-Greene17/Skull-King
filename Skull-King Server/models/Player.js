@@ -1,9 +1,11 @@
 const Box = require('./Box');
 
 class Player {
-    constructor(id, name) {
+    constructor(id, name, socketId) {
         this.id = id;
         this.name = name;
+        this.socketId = socketId;
+        this.gameId = null;
         this.score = 0;
         this.boxes = [];
     }
