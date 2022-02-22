@@ -13,39 +13,27 @@ class Session {
     }
 
     addPlayer(name, socketId) {
-        console.log('Add Player');
         const player = new Player(this.idTracker++, name, socketId);
         player.gameId = this.gameId;
-        console.log(
-            'Player ID: ' + player.id + ', Player Name: ' + player.name
-        );
         this.players.push(player);
         if (this.players.length === 1) {
             this.admin = player.id;
         }
 
-        console.log('Player added!');
-        console.log(this.players);
         return player.id;
     }
 
     removePlayer(playerId) {
-        console.log(playerId);
-        console.log(this.players.length);
-        //this.players = this.players.filter((player) => player.id != playerId);
-        const index = this.players.indexOf(playerId);
-        if (index > -1) {
-            this.players.splice(index, 1);
+        this.players = this.players.filter((player) => player.id != playerId);
+
+        if (this.players.length > 0) {
+            this.admin = this.players[0].id;
         }
-        console.log(this.players.length);
-        this.admin = this.players[0].id;
-        console.log(this.players.length);
     }
 
     startGame() {
         this.scoreboard = new Scoreboard(this.players);
         this.currentRound++;
-        console.log(this.scoreboard);
         this.isOpen = false;
     }
 

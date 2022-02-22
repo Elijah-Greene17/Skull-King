@@ -304,17 +304,16 @@ io.on('connection', (socket) => {
     });
 
     socket.on('disconnect', () => {
-        console.log('user disconnected: ', socket.id);
         const session = lobby.getSessionBySocketId(socket.id);
-        console.log('RM: Session ID -', session.id);
         const player = session.getPlayerBySocketId(socket.id);
-        console.log('RM: Player ID -', player.id);
 
         if (player != null) {
             session.removePlayer(player.id);
-
             const jsonSession = session.convertToJson();
             io.emit('removePlayer', jsonSession);
+            if (session.players.length === 0) {
+                lobby.deleteSession(session.id);
+            }
         }
     });
 
