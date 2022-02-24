@@ -159,7 +159,7 @@ io.on('connection', (socket) => {
         session.removePlayer(playerId);
 
         const jsonSession = session.convertToJson();
-        io.emit('removePlayer', jsonSession);
+        io.in(gameId).emit('removePlayer', jsonSession);
     });
 
     // Start the game
@@ -167,12 +167,13 @@ io.on('connection', (socket) => {
      * param: gameId (String)
      */
     socket.on('start', (req) => {
+        console.log('STARTING GAME', req.gameId);
         const gameId = req.gameId;
         const session = lobby.getSession(gameId);
         session.startGame();
 
         const jsonSession = session.convertToJson();
-        io.emit('start', jsonSession);
+        io.in(gameId).emit('start', jsonSession);
     });
 
     // Input Bids
@@ -188,8 +189,12 @@ io.on('connection', (socket) => {
 
         const session = lobby.getSession(gameId);
         session.setBid(playerId, bid);
-        const jsonSession = session.convertToJson();
-        io.emit('bid', jsonSession);
+
+        if (session.bidsAreIn()) {
+            io.in(gameId).emit('bidsAreIn');
+        }
+        // const jsonSession = session.convertToJson();
+        // io.emit('bid', jsonSession);
     });
 
     // Checks to see if All bids are in
