@@ -191,7 +191,9 @@ io.on('connection', (socket) => {
         session.setBid(playerId, bid);
 
         if (session.bidsAreIn()) {
-            io.in(gameId).emit('bidsAreIn');
+            const jsonSession = session.convertToJson();
+            console.log('JSONSESSION', jsonSession);
+            io.in(gameId).emit('bidsAreIn', jsonSession);
         }
         // const jsonSession = session.convertToJson();
         // io.emit('bid', jsonSession);
