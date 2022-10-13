@@ -263,6 +263,8 @@ io.on('connection', (socket) => {
      * param: bonusPoints (Int)
      */
     socket.on('calculate', (req) => {
+        console.log('CALCULATING');
+        console.log(req);
         const playerId = req.playerId;
         const gameId = req.gameId;
         const bidAchieved = req.bidAchieved;
@@ -312,7 +314,10 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         const session = lobby.getSessionBySocketId(socket.id);
-        const player = session.getPlayerBySocketId(socket.id);
+        let player = null;
+        if (session) {
+            player = session.getPlayerBySocketId(socket.id);
+        }
 
         if (player != null) {
             session.removePlayer(player.id);
@@ -323,11 +328,6 @@ io.on('connection', (socket) => {
             }
         }
     });
-
-    // socket.on('chat message', (msg) => {
-    //     console.log('message2: ' + msg)
-    //     io.emit('chat message', msg)
-    // })
 });
 
 // Run the server
