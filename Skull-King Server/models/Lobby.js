@@ -21,8 +21,6 @@ class Lobby {
     }
 
     getSession(id) {
-        console.log('1 ', id);
-        console.log(this.sessions.length);
         const result = this.sessions.filter((session) => session.id === id);
         if (result.length > 0) {
             return result[0];
@@ -56,7 +54,6 @@ class Lobby {
                 generatedId = generatedId + String(number);
             }
         }
-        console.log(generatedId);
         return generatedId;
     }
 }

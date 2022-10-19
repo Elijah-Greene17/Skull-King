@@ -24,23 +24,18 @@ var lobby = new Lobby('FamDamily');
 
 // Basic HTTP requests
 app.get('/', (req, res) => {
-    console.log('Ping');
     //res.json({ status: 'success' });
     res.send('Ping');
 });
 
 app.get('/idExists/:id', (req, res) => {
-    console.log('idExists: ', req.params.id);
-    console.log(lobby);
     res.json({ idExists: lobby.getSession(req.params.id) !== null });
 });
 
 app.post('/createNewGame', (req, res) => {
     let name = req.body.name;
-    console.log('name: ' + name);
     const gameId = lobby.createSession();
     const session = lobby.getSession(gameId);
-    console.log('Session: ' + session.id);
 
     // if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
     // if (name.toLowerCase() == 'bridget') name = 'Devil in da skies';
@@ -51,16 +46,12 @@ app.post('/createNewGame', (req, res) => {
 
 // Socket Connection for player loading
 io.on('connection', (socket) => {
-    console.log('user connected');
-
     socket.on('pingSocket', (msg) => {
-        console.log('Socket Pinged: ' + msg);
         socket.emit('pingClient', 'Hello from Server!');
     });
 
     // Assign to room
     socket.on('joinRoom', (gameId) => {
-        console.log('User joining room ', gameId);
         socket.join(gameId);
         const players = lobby.getSession(gameId).players;
         io.in(gameId).emit('message', 'cool game');
@@ -112,7 +103,6 @@ io.on('connection', (socket) => {
         let name = data.name;
         const session = lobby.getSession(gameId);
 
-        console.log('User joining room ', gameId);
         socket.join(gameId);
 
         if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
@@ -167,7 +157,6 @@ io.on('connection', (socket) => {
      * param: gameId (String)
      */
     socket.on('start', (req) => {
-        console.log('STARTING GAME', req.gameId);
         const gameId = req.gameId;
         const session = lobby.getSession(gameId);
         session.startGame();
@@ -192,7 +181,6 @@ io.on('connection', (socket) => {
 
         if (session.bidsAreIn()) {
             const jsonSession = session.convertToJson();
-            console.log('JSONSESSION', jsonSession);
             io.in(gameId).emit('bidsAreIn', jsonSession);
         }
         // const jsonSession = session.convertToJson();
@@ -220,6 +208,7 @@ io.on('connection', (socket) => {
      * param: modifyBid (Int) //will be +1 or -1
      */
     socket.on('harry', (req) => {
+        console.log('harry');
         const gameId = req.gameId;
         const playerId = req.playerId;
         const bidIncrement = req.modifyBid;
@@ -228,7 +217,7 @@ io.on('connection', (socket) => {
         session.modifyBid(playerId, bidIncrement);
 
         const jsonSession = session.convertToJson();
-        io.emit('harry', jsonSession);
+        //io.emit('harry', jsonSession);
     });
 
     //TODO: Implement Rascal
@@ -260,30 +249,34 @@ io.on('connection', (socket) => {
      * param: gameId (String)
      * param: bidAchieved (bool)
      * param: tricks (Int)
-     * param: bonusPoints (Int)
+     * param: bonus (Int)
      */
     socket.on('calculate', (req) => {
-        console.log('CALCULATING');
-        console.log(req);
         const playerId = req.playerId;
         const gameId = req.gameId;
-        const bidAchieved = req.bidAchieved;
         const tricks = req.tricks;
-        const bonus = req.bonusPoints;
+        const bonus = req.bonus;
 
         const session = lobby.getSession(gameId);
 
-        if (bidAchieved) {
+        currentRound = session.getCurrentRound();
+        const player = session.getPlayer(playerId);
+        const pBid = parseInt(player.boxes[currentRound - 1].bid);
+
+        if (tricks == pBid) {
             session.achievedBid(playerId, bonus);
-            const jsonSession = session.convertToJson();
-            io.emit(jsonSession);
-            console.log(jsonSession);
         } else {
             session.failedBid(playerId, tricks);
-            const jsonSession = session.convertToJson();
-            io.emit(jsonSession);
-            console.log('calculate', jsonSession);
         }
+
+        session.playersCalculated.addPlayer(player);
+
+        //const jsonSession = session.convertToJson();
+        const data = {
+            players: session.playersCalculated,
+        };
+
+        io.emit('leaderboard', data);
     });
 
     // Check to see if everyones scores are calculated
@@ -291,15 +284,17 @@ io.on('connection', (socket) => {
      * param: gameId (String)
      */
     socket.on('isRoundOver', (req) => {
+        console.log('EG Is round over', req.gameId);
         const gameId = req.gameId;
 
         const session = lobby.getSession(gameId);
+        console.log('EG Session: ', session);
 
         var roundIsOver = session.scoresAreCalculated();
-        var gameIsOver = roundIsOver && session.currentRound == 10;
-
+        var gameIsOver = roundIsOver && session.currentRound == 3;
         if (roundIsOver) {
             session.currentRound++;
+            session.playersCalculated.clearPlayers();
         }
 
         io.emit('isRoundOver', {

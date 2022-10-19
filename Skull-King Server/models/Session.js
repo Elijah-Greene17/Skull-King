@@ -1,5 +1,6 @@
 const Scoreboard = require('./Scoreboard');
 const Player = require('./Player');
+const PlayersCalculated = require('./PlayersCalculated');
 
 class Session {
     constructor(id) {
@@ -10,6 +11,7 @@ class Session {
         this.scoreboard = null;
         this.isOpen = true;
         this.currentRound = 0;
+        this.playersCalculated = new PlayersCalculated();
     }
 
     addPlayer(name, socketId) {
@@ -69,6 +71,10 @@ class Session {
         return rightPlayer;
     }
 
+    getCurrentRound() {
+        return this.currentRound;
+    }
+
     setBid(playerId, bid) {
         var player = this.getPlayer(playerId);
         player.boxes[this.currentRound - 1].bid = bid;
@@ -92,14 +98,13 @@ class Session {
     achievedBid(playerId, bonus) {
         const player = this.getPlayer(playerId);
         const box = player.boxes[this.currentRound - 1];
-        const bid = box.bid;
+        const bid = parseInt(box.bid);
         var points = 0;
         if (bid == 0) {
             points = this.currentRound * 10;
         } else {
             points = bid * 20;
         }
-
         // Handle Rascal Wager
         if (box.wager != null) {
             points += box.wager;
@@ -112,7 +117,7 @@ class Session {
     failedBid(playerId, tricks) {
         const player = this.getPlayer(playerId);
         const box = player.boxes[this.currentRound - 1];
-        var bid = box.bid;
+        var bid = parseInt(box.bid);
         var points = 0;
         if (bid == 0) {
             points = this.currentRound * -10;
@@ -131,7 +136,7 @@ class Session {
 
     scoresAreCalculated() {
         var scoresAreCalculated = true;
-        players.forEach((player) => {
+        this.players.forEach((player) => {
             var points = player.boxes[this.currentRound - 1].points;
             if (points == 0) {
                 scoresAreCalculated = false;
