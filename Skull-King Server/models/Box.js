@@ -8,7 +8,7 @@ class Box {
     }
 
     modifyBid(bidIncrement) {
-        this.bid += bidIncrement;
+        this.bid = parseInt(this.bid) + parseInt(bidIncrement);
     }
 
     setWager(wager) {

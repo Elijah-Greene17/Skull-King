@@ -205,19 +205,19 @@ io.on('connection', (socket) => {
     /**
      * param: gameId (String)
      * param: playerId (Int)
-     * param: modifyBid (Int) //will be +1 or -1
+     * param: bidIncrement (Int) //will be +1 or -1
      */
     socket.on('harry', (req) => {
         console.log('harry');
         const gameId = req.gameId;
         const playerId = req.playerId;
-        const bidIncrement = req.modifyBid;
+        const bidIncrement = req.bidIncrement;
 
         const session = lobby.getSession(gameId);
         session.modifyBid(playerId, bidIncrement);
 
         const jsonSession = session.convertToJson();
-        //io.emit('harry', jsonSession);
+        io.emit('harry', jsonSession);
     });
 
     //TODO: Implement Rascal
@@ -291,7 +291,7 @@ io.on('connection', (socket) => {
         console.log('EG Session: ', session);
 
         var roundIsOver = session.scoresAreCalculated();
-        var gameIsOver = roundIsOver && session.currentRound == 3;
+        var gameIsOver = roundIsOver && session.currentRound == 1;
         if (roundIsOver) {
             session.currentRound++;
             session.playersCalculated.clearPlayers();
