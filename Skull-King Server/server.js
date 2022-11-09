@@ -44,6 +44,13 @@ app.post('/createNewGame', (req, res) => {
     res.json({ id: gameId });
 });
 
+app.get('/admin/getSessionInfo/:gameId', (req, res) => {
+    console.log('getsessioninfo ', req.params.gameId);
+    const gameId = req.params.gameId;
+    const session = lobby.getSession(gameId);
+    res.json(session);
+});
+
 // Socket Connection for player loading
 io.on('connection', (socket) => {
     socket.on('pingSocket', (msg) => {
@@ -291,7 +298,7 @@ io.on('connection', (socket) => {
         console.log('EG Session: ', session);
 
         var roundIsOver = session.scoresAreCalculated();
-        var gameIsOver = roundIsOver && session.currentRound == 1;
+        var gameIsOver = roundIsOver && session.currentRound == 2;
         if (roundIsOver) {
             session.currentRound++;
             session.playersCalculated.clearPlayers();
@@ -300,6 +307,7 @@ io.on('connection', (socket) => {
         io.emit('isRoundOver', {
             roundIsOver: roundIsOver,
             gameIsOver: gameIsOver,
+            scoreBoard: session.scoreboard,
         });
 
         if (gameIsOver) {
