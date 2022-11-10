@@ -334,6 +334,6 @@ io.on('connection', (socket) => {
 });
 
 // Run the server
-server.listen(3001, () => {
+server.listen(process.env.PORT || 3001, () => {
     console.log('Server is running');
 });
