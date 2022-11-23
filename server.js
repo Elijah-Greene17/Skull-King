@@ -326,9 +326,6 @@ io.on('connection', (socket) => {
             session.removePlayer(player.id);
             const jsonSession = session.convertToJson();
             io.emit('removePlayer', jsonSession);
-            if (session.players.length === 0) {
-                lobby.deleteSession(session.id);
-            }
         }
     });
 });
