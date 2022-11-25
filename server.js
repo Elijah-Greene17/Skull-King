@@ -114,7 +114,7 @@ io.on('connection', (socket) => {
 
         if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
         if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
-        if (session != null && session.isOpen) {
+        if (session != null && (session.isOpen || data.override)) {
             let playerId = session.addPlayer(name, socket.id);
 
             io.in(gameId).emit('gameJoined', {
