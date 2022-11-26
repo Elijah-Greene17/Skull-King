@@ -51,7 +51,7 @@ app.get('/admin/getSessionInfo/:gameId', (req, res) => {
     res.json(session);
 });
 
-app.get('updateLeaderBoard', () => {
+app.get('/updateLeaderBoard', () => {
     const data = {
         players: session.playersCalculated,
     };
