@@ -51,6 +51,13 @@ app.get('/admin/getSessionInfo/:gameId', (req, res) => {
     res.json(session);
 });
 
+app.post('updateLeaderBoard', () => {
+    const data = {
+        players: session.playersCalculated,
+    };
+    io.emit('leaderboard', data);
+})
+
 // Socket Connection for player loading
 io.on('connection', (socket) => {
     socket.on('pingSocket', (msg) => {
@@ -60,9 +67,9 @@ io.on('connection', (socket) => {
     // Assign to room
     socket.on('joinRoom', (gameId) => {
         socket.join(gameId);
-        const players = lobby.getSession(gameId).players;
-        io.in(gameId).emit('message', 'cool game');
-        io.in(gameId).emit('setPlayerList', players);
+        // const players = lobby.getSession(gameId).players;
+        // io.in(gameId).emit('message', 'cool game');
+        // io.in(gameId).emit('setPlayerList', players);
     });
 
     // Attempt to join an existing game
