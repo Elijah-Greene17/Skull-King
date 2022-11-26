@@ -65,41 +65,6 @@ io.on('connection', (socket) => {
         io.in(gameId).emit('setPlayerList', players);
     });
 
-    /*
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
-    socket.on('chat message', (msg) => {
-        console.log('message2: ' + msg);
-        io.emit('chat message', msg);
-    })
-    */
-
-    // Attempt to create a game
-    /**
-     * param: name (String)
-     */
-    // socket.on('newGame', (data) => {
-    //     let name = data.name;
-    //     console.log('name: ' + name);
-    //     const gameId = lobby.createSession();
-    //     const session = lobby.getSession(gameId);
-    //     console.log('Session: ' + session.id);
-
-    //     if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
-    //     if (name.toLowerCase() == 'bridget') name = 'Devil in da skies';
-    //     const playerId = session.addPlayer(name);
-
-    //     socket.emit('gameCreated', {
-    //         gameId: gameId,
-    //         playerId: playerId,
-    //         host: session.admin,
-    //         playerList: session.players.map((i) => {
-    //             return i.name;
-    //         }),
-    //     });
-    // });
-
     // Attempt to join an existing game
     /**
      * param: gameId (String)
@@ -322,11 +287,11 @@ io.on('connection', (socket) => {
             player = session.getPlayerBySocketId(socket.id);
         }
 
-        if (player != null) {
-            session.removePlayer(player.id);
-            const jsonSession = session.convertToJson();
-            io.emit('removePlayer', jsonSession);
-        }
+        // if (player != null) {
+        //     session.removePlayer(player.id);
+        //     const jsonSession = session.convertToJson();
+        //     io.emit('removePlayer', jsonSession);
+        // }
     });
 });
 
