@@ -273,7 +273,7 @@ io.on('connection', (socket) => {
         console.log('EG Session: ', session);
 
         var roundIsOver = session.scoresAreCalculated();
-        var gameIsOver = roundIsOver && session.currentRound == 2;
+        var gameIsOver = roundIsOver && session.currentRound == 10;
         if (roundIsOver) {
             session.currentRound++;
             session.playersCalculated.clearPlayers();
