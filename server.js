@@ -88,7 +88,11 @@ io.on('connection', (socket) => {
         socket.join(gameId);
 
         if (name.toLowerCase() == 'michaela') name = 'HORTENSE';
+        if (name.toLowerCase() == 'rich') name = 'Richard';
         if (name.toLowerCase() == 'bridget') name = 'Devil in disguise';
+        if (name.toLowerCase() == 'hushi') name = 'Devil in disguise';
+        if (name.toLowerCase() == 'hashi') name = 'Devil in disguise';
+
         if (session != null && (session.isOpen || data.override)) {
             let playerId = session.addPlayer(name, socket.id);
 
